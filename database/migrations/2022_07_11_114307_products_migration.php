@@ -15,10 +15,12 @@ class ProductsMigration extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->varchar('name');
-            $table->varchar('description');
+            $table->string('name', 200);
+            $table->string('description', 1000);
             $table->float('price');
-            $table->varchar('main_photo');
+            $table->string('main_photo', 255);
+            $table->string('additional_photo_1', 255);
+            $table->string('additional_photo_2', 255);
             $table->timestamp('create_at')->useCurrent();
         });
     }

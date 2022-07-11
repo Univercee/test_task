@@ -28,7 +28,7 @@ class Product extends Model
 
     //
     public static function get($id, $fields = []){
-        $columns = ['name', 'price', 'main_image'];
+        $columns = ['name', 'price', 'main_image', 'created_at'];
         foreach($fields as $field){
             if (Schema::hasColumn('products', $field) && !in_array($columns, $field, true)){
                 array_push($columns, $field);
@@ -40,7 +40,7 @@ class Product extends Model
 
     //
     public static function getAll(){
-        $columns = ['name', 'price', 'main_image'];
+        $columns = ['name', 'price', 'main_image', 'created_at'];
         $data = Product::select($columns)->get();
         return $data;
     }

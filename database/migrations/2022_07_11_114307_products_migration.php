@@ -18,10 +18,9 @@ class ProductsMigration extends Migration
             $table->string('name', 200);
             $table->string('description', 1000);
             $table->float('price');
-            $table->string('main_photo', 255);
-            $table->string('additional_photo_1', 255);
-            $table->string('additional_photo_2', 255);
-            $table->timestamp('create_at')->useCurrent();
+            $table->string('main_image', 255)->nullable();
+            $table->json('images')->nullable();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

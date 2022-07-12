@@ -47,7 +47,7 @@ class Product extends Model
 
     //
     public static function create(string $name, string $description, float $price, string $main_image, array $images){
-        if(self::validate_creation_data($name, $description, $price, $main_image, $images)){
+        if(self::validate_product_data($name, $description, $price, $main_image, $images)){
             $id = Product::insertGetId([
                 "name" => $name,
                 "description" => $description,
@@ -63,7 +63,7 @@ class Product extends Model
     }
 
     //
-    private static function validate_creation_data(string $name, string $description, float $price, string $main_image, array $images){
+    private static function validate_product_data(string $name, string $description, float $price, string $main_image, array $images){
         $is_valid = true;
         if(strlen($name) > 200 || strlen($name) == 0){
             $is_valid = false;

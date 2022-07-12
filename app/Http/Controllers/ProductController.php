@@ -11,7 +11,7 @@ class ProductController extends Controller
     //
     public function get(int $id)
     {
-        $product = Product::get($id);
+        $product = Product::get($id, ['images', 'description']);
         return response()->json($product, 200);
     }
 
@@ -30,7 +30,7 @@ class ProductController extends Controller
             $request->input('description')??'', 
             $request->input('price')??-1, 
             $request->input('main_image')??'',
-            $request->input('images')??'[]'
+            $request->input('images')??[]
         );
         $code = $id==-1 ? 422 : 200;
         return response()->json($id, $code);

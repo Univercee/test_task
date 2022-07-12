@@ -30,11 +30,14 @@ class Product extends Model
     public static function get($id, $fields = []){
         $columns = ['id', 'name', 'price', 'main_image', 'created_at'];
         foreach($fields as $field){
-            if (Schema::hasColumn('products', $field) && !in_array($columns, $field, true)){
+            if (Schema::hasColumn('products', $field) && !in_array($field, $columns, true)){
                 array_push($columns, $field);
             }
         }
-        $data = Product::select($columns)->where('id', $id)->get();
+        $data = Product::select($columns)->where('id', $id)->first();
+        if($data){
+            $data['images'] = json_decode($data['images']);
+        }
         return $data;
     }
 

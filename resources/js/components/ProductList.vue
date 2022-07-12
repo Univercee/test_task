@@ -1,23 +1,41 @@
 <template>
-    <div>
-        <button v-on:click="sortByCreatedAt">CreatedAt</button>
-        <button v-on:click="sortByPrice">Price</button>
-        <div v-for="product in products" :key="product.id" class="card">
-            <p>{{product.name}}</p>
-            <p>{{product.price}}</p>
-            <p>{{product.main_image}}</p>
-            <p>{{product.created_at}}</p>
-            <router-link :to="{name: 'product', params:{id: product.id}}">Go to About</router-link>
+    <div class="d-flex flex-column justify-content-center container mt-2">
+        <div class="d-flex flex-column align-items-center text-center my-2">
+            <pagination v-model="page" :records="products.length" :per-page="products_per_page" @paginate="paginationCallback"/>
+            <div class="mt-1">Sort by</div>
+            <div>
+                <button v-on:click="sortBy('id')">Default</button>
+                <button v-on:click="sortBy('created_at')">CreatedAt</button>
+                <button v-on:click="sortBy('price')">Price</button>
+            </div>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center">
+            <div v-for="product in products_on_page" :key="product.id" class="card flex m-2" style="width: 12rem;">
+                <img :src="product.main_image" class="card-img-top" alt="Product image">
+                <div class="card-body">
+                    <h3>{{product.name}}</h3>
+                    <p>Price: {{product.price}}$</p>
+                    <p>Created: {{product.created_at}}</p>
+                    <div class="btn btn-primary float-right" v-on:click="showProduct(product.id)">About</div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+    import Pagination from 'vue-pagination-2';
     export default {
         name: "ProductList",
+        components: {
+            Pagination
+        },
         data(){
             return {
-                products: []
+                page: 1,
+                products_per_page: 10,
+                products: [],
+                products_on_page: []
             }
         },
         mounted() {
@@ -28,21 +46,26 @@
                 await axios({
                     method: 'get',
                     url: 'api/products',
-                }).then(response => this.products = response.data);
-            },
-            sortByCreatedAt(){
-                this.products.sort(function(a, b) {
-                    var x = a.created_at; 
-                    var y = b.created_at;
-                    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                }).then((response)=>{
+                    this.products = response.data
+                    this.paginationCallback()
                 });
             },
-            sortByPrice(){
+            showProduct(id){
+                this.$router.push({name:'product', params:{id: id}})
+            },
+            sortBy(param){
                 this.products.sort(function(a, b) {
-                    var x = a.price; 
-                    var y = b.price;
+                    var x = a[param]; 
+                    var y = b[param];
                     return ((x < y) ? -1 : ((x > y) ? 1 : 0));
                 });
+                this.paginationCallback()
+            },
+            paginationCallback(){
+                let first = (this.page-1)*this.products_per_page
+                let last = this.page*this.products_per_page
+                this.products_on_page = this.products.slice(first, last)
             }
         }
     }

@@ -2,16 +2,21 @@
     <div class="d-flex flex-column justify-content-center container mt-2">
         <div class="d-flex flex-column align-items-center text-center my-2">
             <pagination v-model="page" :records="products.length" :per-page="products_per_page" @paginate="paginationCallback"/>
-            <div class="mt-1">Sort by</div>
-            <div>
-                <button v-on:click="sortBy('id')">Default</button>
-                <button v-on:click="sortBy('created_at')">CreatedAt</button>
-                <button v-on:click="sortBy('price')">Price</button>
+            <div class="w-100 d-flex align-items-end justify-content-between">
+                <div class="btn btn-primary float-left" v-on:click="createProduct()">Create</div>
+                <div class="float-right">
+                    <div class="mt-1">Sort by</div>
+                    <div>
+                        <div class="btn btn-secondary" v-on:click="sortBy('id')">Default</div>
+                        <div class="btn btn-secondary" v-on:click="sortBy('created_at')">CreatedAt</div>
+                        <div class="btn btn-secondary" v-on:click="sortBy('price')">Price</div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="d-flex flex-wrap justify-content-center">
-            <div v-for="product in products_on_page" :key="product.id" class="card flex m-2" style="width: 12rem;">
-                <img :src="product.main_image" class="card-img-top" alt="Product image">
+        <div class="d-flex flex-wrap justify-content-between">
+            <div v-for="product in products_on_page" :key="product.id" class="card flex mb-4" style="width: 12rem;">
+                <img :src="product.main_image" class="card-img-top" style="width:190px; height:190px" alt="Product image">
                 <div class="card-body">
                     <h3>{{product.name}}</h3>
                     <p>Price: {{product.price}}$</p>
@@ -53,6 +58,9 @@
             },
             showProduct(id){
                 this.$router.push({name:'product', params:{id: id}})
+            },
+            createProduct(id){
+                this.$router.push({name:'create_product'})
             },
             sortBy(param){
                 this.products.sort(function(a, b) {

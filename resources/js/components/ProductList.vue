@@ -14,6 +14,7 @@
 
 <script>
     export default {
+        name: "ProductList",
         mounted() {
             console.log('Component mounted.')
         }

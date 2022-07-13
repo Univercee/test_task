@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Model\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {   
@@ -25,14 +26,25 @@ class ProductController extends Controller
     //
     public function create(Request $request)
     {
-        $id = Product::create(
-            $request->input('name')??'', 
-            $request->input('description')??'', 
-            $request->input('price')??-1, 
-            $request->input('main_image')??'',
-            $request->input('images')??[]
-        );
-        $code = $id==-1 ? 422 : 200;
-        return response()->json($id, $code);
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:200',
+            'description' => 'required|max:1000',
+            'price' => 'required|numeric|min:0',
+            'main_image' => 'required|max:255',
+            'images' => 'required|array|max:2',
+        ]);
+        if($validator->fails()){
+            return response()->json($validator->errors(), 422);
+        }
+        else{
+            $id = Product::create(
+                $request->input('name'), 
+                $request->input('description'), 
+                $request->input('price'), 
+                $request->input('main_image'),
+                $request->input('images')
+            );
+            return response()->json($id, 200);
+        }
     }
 }

@@ -50,36 +50,13 @@ class Product extends Model
 
     //
     public static function create(string $name, string $description, float $price, string $main_image, array $images){
-        if(self::validate_product_data($name, $description, $price, $main_image, $images)){
-            $id = Product::insertGetId([
-                "name" => $name,
-                "description" => $description,
-                "price" => $price,
-                "main_image" => $main_image,
-                "images" => json_encode($images)
-            ]);
-        }
-        else{
-            $id = -1;
-        }
+        $id = Product::insertGetId([
+            "name" => $name,
+            "description" => $description,
+            "price" => $price,
+            "main_image" => $main_image,
+            "images" => json_encode($images)
+        ]);
         return $id;
-    }
-
-    //
-    private static function validate_product_data(string $name, string $description, float $price, string $main_image, array $images){
-        $is_valid = true;
-        if(strlen($name) > 200 || strlen($name) == 0){
-            $is_valid = false;
-        }
-        if(strlen($description) > 1000){
-            $is_valid = false;
-        }
-        if($price < 0){
-            $is_valid = false;
-        }
-        if(count($images) > 2){
-            $is_valid = false;
-        }
-        return $is_valid;
     }
 }

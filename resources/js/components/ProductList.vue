@@ -7,9 +7,9 @@
                 <div class="float-right">
                     <div class="mt-1">Sort by</div>
                     <div>
-                        <div class="btn btn-secondary" v-on:click="sortBy('id')">Default</div>
-                        <div class="btn btn-secondary" v-on:click="sortBy('created_at')">CreatedAt</div>
-                        <div class="btn btn-secondary" v-on:click="sortBy('price')">Price</div>
+                        <FilterButton :data="products" field="id" v-on:update:data="updateProducts($event)"></FilterButton>
+                        <FilterButton :data="products" field="created_at" v-on:update:data="updateProducts($event)"></FilterButton>
+                        <FilterButton :data="products" field="price" v-on:update:data="updateProducts($event)"></FilterButton>
                     </div>
                 </div>
             </div>
@@ -30,10 +30,12 @@
 
 <script>
     import Pagination from 'vue-pagination-2';
+    import FilterButton from './FilterButton.vue';
     export default {
         name: "ProductList",
         components: {
-            Pagination
+            Pagination,
+            FilterButton
         },
         data(){
             return {
@@ -62,14 +64,11 @@
             createProduct(id){
                 this.$router.push({name:'create_product'})
             },
-            sortBy(param){
-                this.products.sort(function(a, b) {
-                    var x = a[param]; 
-                    var y = b[param];
-                    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-                });
+            updateProducts(products){
+                console.log(products);
+                this.products = products
                 this.paginationCallback()
-            },
+            },  
             paginationCallback(){
                 let first = (this.page-1)*this.products_per_page
                 let last = this.page*this.products_per_page

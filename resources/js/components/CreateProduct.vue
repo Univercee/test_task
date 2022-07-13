@@ -14,12 +14,12 @@
                 <input type="number" name="price" v-model="price" class="ml-2 float-right" placeholder="Price">
             </div>
             <div class="mb-2">
-                <label for="main_image">Main photo: </label>
+                <label for="main_image">Main image: </label>
                 <input type="text" name="main_image" v-model="main_image" class="ml-2 float-right" placeholder="Main photo">
             </div>
             <div class="mb-2">
-                <label for="image[]">Image: </label>
-                <input type="text" name="image[]" v-model="images[0]" class="ml-2 float-right" placeholder="Image">
+                <label for="images">Image: </label>
+                <input type="text" name="images" v-model="images" class="ml-2 float-right" placeholder="Images (split by ';')">
             </div>
             <input type="submit" class="btn btn-primary" value="Create">
         </form>
@@ -40,7 +40,7 @@
                 description: "",
                 price: 0,
                 main_image: "",
-                images: []
+                images: ""
             }
         },
         methods: {
@@ -53,12 +53,16 @@
                         description: this.description,
                         price: this.price,
                         main_image: this.main_image,
-                        images: this.images
+                        images: this.images.split(";")
                     }
                 }).then((response)=>{
                     this.$router.push({name:'product', params:{id: response.data}})
                 }).catch((err)=>{
-                    alert("Bad request")
+                    let str = "Error\n"
+                    for(e in err.response.data){
+                        str += e+": "+err.response.data[e]+'\n'
+                    }
+                    alert(str)
                 })
             },
         }

@@ -16,7 +16,7 @@
     <main class="wrapper">
         <?php
             require __DIR__.'/src/views/components/navbar.php';
-            require __DIR__.'/__router.php';
+            require __DIR__.'/router.php';
             require __DIR__.'/src/views/components/error.php';
             require __DIR__.'/src/views/components/message.php';
         ?>

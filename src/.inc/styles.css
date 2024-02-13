@@ -24,6 +24,10 @@
     color: #EF4444;
 }
 
+.table {
+    border-spacing: 30px;
+}
+
 .form {
     display: flex;
     flex-direction: column;
@@ -40,6 +44,23 @@
     display: flex;
     gap: .5rem;
     list-style-type: none;
+    text-align: center;
     margin: 0;
     padding: 0;
+}
+
+@media screen and (max-width: 600px) {
+    .navbar ul{
+        flex-direction: column;
+    }
+
+    .table{
+        
+    }
+    
+    .table-wrapper {
+        width: 100%;
+        align-self: flex-start;
+        overflow-x: scroll;
+    }
 }

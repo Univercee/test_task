@@ -1,6 +1,6 @@
 <?php
 class FileManager {    
-    private static $relative_path = "/.inc/files/";
+    private static $relative_path = "/src/.inc/files/";
 
     static function isFileExists(string $filename){
         try {

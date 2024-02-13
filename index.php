@@ -1,11 +1,8 @@
 <?php
-    if(session_id() == '') {
-        session_start();
-    }
-    require_once __DIR__ .'/.core/controllers/index.php';
-    require_once __DIR__ .'/.core/db/index.php';
-    require_once __DIR__ .'/.core/lib/index.php';
-    require_once  __DIR__ ."/vendor/autoload.php";
+    require_once __DIR__ .'/src/.core/controllers/index.php';
+    require_once __DIR__ .'/src/.core/db/index.php';
+    require_once __DIR__ .'/src/.core/lib/index.php';
+    require_once __DIR__ ."/vendor/autoload.php";
 ?>
 
 <!DOCTYPE html>
@@ -18,10 +15,10 @@
 <body>
     <main class="wrapper">
         <?php
-            require __DIR__.'/views/components/navbar.php';
+            require __DIR__.'/src/views/components/navbar.php';
             require __DIR__.'/__router.php';
-            require __DIR__.'/views/components/error.php';
-            require __DIR__.'/views/components/message.php';
+            require __DIR__.'/src/views/components/error.php';
+            require __DIR__.'/src/views/components/message.php';
         ?>
         
     </main>
@@ -29,5 +26,5 @@
 </html>
 
 <style>
-    <?php include __DIR__.'/.inc/styles.css'; ?>
+    <?php include __DIR__.'/src/.inc/styles.css'; ?>
 </style>

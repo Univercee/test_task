@@ -7,6 +7,6 @@
     $telegram_id = empty($_POST['telegram_id']) ? null : $_POST['telegram_id'];
     $state = $userController->update($id, $name, $email, $telegram_id);
 
-    include __DIR__.'/__answer.php';
+    include __DIR__.'/../__answer.php';
 
 ?>

@@ -22,7 +22,7 @@ else {
 
         //views
         case 'users':
-            include __DIR__.'/users.php';
+            include __DIR__.'/components/User/table.php';
             break;
         case 'user-create':
             include __DIR__.'/components/User/create.php';
@@ -30,20 +30,34 @@ else {
         case 'user-update':
             include __DIR__.'/components/User/update.php';
             break;
+        case 'file':
+            include __DIR__.'/components/File/view.php';
+            break;
+        case 'files':
+            include __DIR__.'/components/File/table.php';
+            break;
+        
 
         //actions
         case 'user-create-action':
-            include __DIR__.'/actions/user-create.php';
+            include __DIR__.'/actions/user/create.php';
             break;
         case 'user-update-action':
-            include __DIR__.'/actions/user-update.php';
+            include __DIR__.'/actions/user/update.php';
             break;
         case 'user-delete-action':
-            include __DIR__.'/actions/user-delete.php';
+            include __DIR__.'/actions/user/delete.php';
             break;
-        case 'answer':
-            include __DIR__.'/actions/__answer.php';
+        case 'file-upload-action':
+            include __DIR__.'/actions/file/upload.php';
             break;
+        case 'file-delete-action':
+            include __DIR__.'/actions/file/delete.php';
+            break;
+        case 'file-send-action':
+            include __DIR__.'/actions/file/send.php';
+            break;
+        
         
         default:
             include __DIR__.'/not-found.php';

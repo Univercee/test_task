@@ -92,6 +92,15 @@ class UserTable {
     }
 
     //
+    public function getTelegramIds(){
+        $query = $this->pdo->prepare("SELECT telegram_id FROM `users` WHERE telegram_id IS NOT NULL");
+        $query->execute();
+        $ids = $query->fetchAll();
+        return $ids;
+    }
+
+
+    //
     private function isLoginExist(UserModel|UserCreateModel $user){
         $query = $this->pdo->prepare("SELECT id FROM `users` WHERE email = :email OR telegram_id = :telegram_id");
         $query->execute([

@@ -1,0 +1,17 @@
+{
+    "name": "aleksandr/test-task",
+    "autoload": {
+        "psr-4": {
+            "Aleksandr\\TestTask\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "u7NGAQhsej",
+            "email": "aleksandr.ostromogilskii@gmail.com"
+        }
+    ],
+    "require": {
+        "westacks/telebot": "^3.1"
+    }
+}

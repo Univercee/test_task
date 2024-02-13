@@ -5,6 +5,7 @@
     require_once __DIR__ .'/.core/controllers/index.php';
     require_once __DIR__ .'/.core/db/index.php';
     require_once __DIR__ .'/.core/lib/index.php';
+    require_once  __DIR__ ."/vendor/autoload.php";
 ?>
 
 <!DOCTYPE html>

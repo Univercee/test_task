@@ -11,6 +11,6 @@
         <label for="telegram_id">Telegram ID</label>
         <input type="text" name="telegram_id" id="telegram_id">
     </div>
-    <input type="submit" value="Сохранить">
+    <input type="submit" value="Создать">
 </form>
 <a href="/">To main page</a>

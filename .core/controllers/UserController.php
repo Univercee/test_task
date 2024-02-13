@@ -1,13 +1,13 @@
 <?php
 class UserController {
-    private $table;
+    private $handler;
     public function __construct() {
-        $this->table = new UserTable();
+        $this->handler = new UserTable();
     }
 
     public function get(int $id): State{
         try {
-            $user = $this->table->getById($id);
+            $user = $this->handler->getById($id);
             return new State(Message::$defaultMessage, null, $user);
         } catch (\Throwable $th) {
             return new State(null, $th->getMessage());
@@ -16,7 +16,7 @@ class UserController {
 
     public function getAll(): State{
         try {
-            $users = $this->table->getAll();
+            $users = $this->handler->getAll();
             return new State(Message::$defaultMessage, null, $users);
         } catch (\Throwable $th) {
             return new State(null, $th->getMessage());
@@ -26,7 +26,7 @@ class UserController {
     public function create(string $name, string|null $email = null, string|null $telegram_id = null): State{
         try {
             $user = new UserCreateModel($name, $email, $telegram_id);
-            $message = $this->table->create($user);
+            $message = $this->handler->create($user);
             return new State($message, null);
         } catch (\Throwable $th) {
             return new State(null, $th->getMessage());
@@ -36,7 +36,7 @@ class UserController {
     public function update(int $id, string $name, string|null $email = null, string|null $telegram_id = null): State{
         try {
             $user = new UserModel($id, $name, $email, $telegram_id);
-            $message = $this->table->update($user);
+            $message = $this->handler->update($user);
             return new State($message, null);
         } catch (\Throwable $th) {
             return new State(null, $th->getMessage());
@@ -45,7 +45,7 @@ class UserController {
 
     public function delete(int $id): State{
         try {
-            $message = $this->table->delete($id);
+            $message = $this->handler->delete($id);
             return new State($message, null);
         } catch (\Throwable $th) {
             return new State(null, $th->getMessage());

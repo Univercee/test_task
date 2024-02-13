@@ -1,1 +1,1 @@
-<a href="/">To main page</a>
+<a href="/">На главную</a>

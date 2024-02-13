@@ -26,7 +26,10 @@ class UserCreateModel{
 
 
     //setters
-    public function setName(string|null $name){
+    public function setName(string $name){
+        if(empty($name)){
+            throw new Error(ErrorMessage::$emptyName);
+        }
         $this->name = $name;
     }
     public function setEmail(string|null $email){

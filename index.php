@@ -19,7 +19,7 @@
     <main class="wrapper">
         <?php
             require __DIR__.'/views/components/navbar.php';
-            require __DIR__.'/views/__router.php';
+            require __DIR__.'/__router.php';
             require __DIR__.'/views/components/error.php';
             require __DIR__.'/views/components/message.php';
         ?>
@@ -29,5 +29,5 @@
 </html>
 
 <style>
-    <?php include __dir__.'/.inc/styles.css'; ?>
+    <?php include __DIR__.'/.inc/styles.css'; ?>
 </style>

@@ -6,5 +6,5 @@
 ?>
 
 <?php
-    header('Location: /file?filename='.$filename);
+    if(empty($state->error)) header('Location: /file?filename='.$filename);
 ?>

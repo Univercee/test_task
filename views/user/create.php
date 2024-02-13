@@ -13,4 +13,4 @@
     </div>
     <input type="submit" value="Создать">
 </form>
-<a href="/">To main page</a>
+<a href="/">На главную</a>

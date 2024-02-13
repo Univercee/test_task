@@ -99,6 +99,14 @@ class UserTable {
         return $ids;
     }
 
+    //
+    public function getEmails(){
+        $query = $this->pdo->prepare("SELECT email FROM `users` WHERE email IS NOT NULL");
+        $query->execute();
+        $ids = $query->fetchAll();
+        return $ids;
+    }
+
 
     //
     private function isLoginExist(UserModel|UserCreateModel $user){

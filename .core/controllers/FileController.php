@@ -21,8 +21,13 @@ class FileController {
 
     public function upload(array $file): State{
         try {
+
+            $ext = explode('.', $file["name"])[1];
+            if($ext != 'pdf'){
+                return new State(null, ErrorMessage::$incorrectFileExtension);
+            }
             FileManager::upload($file["tmp_name"], $file["name"]);
-           return new State(Message::$fileUploadSuccessfully, null, $file["name"]);
+            return new State(Message::$fileUploadSuccessfully, null, $file["name"]);
         } catch (\Throwable $th) {
             return new State(null, $th->getMessage());
         }
@@ -31,13 +36,24 @@ class FileController {
     public function delete(string $filename): State{
         try {
             FileManager::delete($filename);
-           return new State(Message::$fileDeleteSuccessfully);
+            return new State(Message::$fileDeleteSuccessfully);
         } catch (\Throwable $th) {
             return new State(null, $th->getMessage());
         }
     }
 
-    public function sendTelegram(string $filename): State{
+    public function send(string $filename){
+        try {
+            $this->sendTelegram($filename);
+            $this->sendEmail($filename);
+            FileManager::delete($filename);
+            return new State(Message::$fileSendSuccessfully);
+        } catch (\Throwable $th) {
+            return new State(null, $th->getMessage());
+        }
+    }
+
+    private function sendTelegram(string $filename){
         if(empty($filename)){
             return new State(null, ErrorMessage::$emptyFilename);
         }
@@ -46,9 +62,22 @@ class FileController {
             foreach($rows as $row){
                 TelegramManager::getInstance()->sendMessage($row["telegram_id"], $filename);
             }
-            return new State(Message::$defaultMessage, null);
         } catch (\Throwable $th) {
-            return new State(null, $th->getMessage());
+            return $th->getMessage();
+        }
+    }
+
+    private function sendEmail(string $filename){
+        if(empty($filename)){
+            return new State(null, ErrorMessage::$emptyFilename);
+        }
+        try {
+            $rows = (new UserTable())->getEmails();
+            foreach($rows as $row){
+                EmailManager::sendMail($row["email"], $filename);
+            }
+        } catch (\Throwable $th) {
+            return $th->getMessage();
         }
     }
 }

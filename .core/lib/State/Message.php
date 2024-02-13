@@ -7,6 +7,7 @@ class Message {
     public static $userDeleteSuccessfully = "Пользователь успешно удален";
     public static $fileUploadSuccessfully = "Файл успешно загружен";
     public static $fileDeleteSuccessfully = "Файл успешно удален";
+    public static $fileSendSuccessfully = "Файл успешно отправлен";
 }
 
 ?>

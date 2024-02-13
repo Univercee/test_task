@@ -15,7 +15,7 @@
     <nav class="navbar">
         <ul>
             <li><a href="/">На главную</a></li>
-            <li><a href="/send">Отправить файл</a></li>
+            <li><a href="/file-send-action?filename=<?php echo $filename;?>">Отправить файл</a></li>
             <li>
                 <form action="file-delete-action" method="POST">
                     <input type="text" name="filename" value="<?php echo $filename;?>" hidden>

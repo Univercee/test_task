@@ -28,7 +28,7 @@ if($user) { ?>
         </div>
         <input type="submit" value="Сохранить">
     </form>
-    <a href="/">To main page</a>
+    <a href="/">На главную</a>
 <?php } 
     else { 
         header('Location: /not-found');

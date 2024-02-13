@@ -8,6 +8,7 @@ class ErrorMessage {
     public static $emptyName = "Заполните имя пользователя";
     public static $emptyFilename = "Файл не указан";
     public static $fileNotFound = "Файл не найден";
+    public static $incorrectFileExtension = "Разрешены только .pdf файлы";
 }
 
 ?>

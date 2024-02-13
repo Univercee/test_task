@@ -1,0 +1,45 @@
+.wrapper {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.message {
+    width: max-content;
+    max-width: 90vw;
+    padding: 1rem;
+    border-radius: .5rem;
+}
+
+.message.success {
+    background-color: rgba(75, 181, 67, .2);
+    color: #4BB543;
+}
+
+.message.error {
+    background-color: rgba(239, 68, 68, .2);
+    color: #EF4444;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 20rem;
+}
+
+.form div{
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar ul{
+    display: flex;
+    gap: .5rem;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}

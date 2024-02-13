@@ -13,7 +13,7 @@ class FileManager {
 
     static function getAll(){
         try {
-            $files = array_diff(scandir(self::getPath()), array('.', '..'));
+            $files = array_diff(scandir(self::getPath()), array('.', '..', '.gitignore'));
             return $files;
         } catch (\Throwable $th) {
             throw $th;
